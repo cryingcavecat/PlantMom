@@ -23,6 +23,9 @@ class bcolors:
 
 load_dotenv()
 
+time_between_actions = 60
+time_between_loop = 60
+
 # MQTT stuff
 mqtt_user = os.getenv('MQTT_USER',"Couldn't find MQTT username")
 mqtt_pass =  os.getenv('MQTT_PASS',"Couldn't find MQTT password")
@@ -65,36 +68,50 @@ def extract_tool_call(text):
     match = re.search(pattern, text, re.DOTALL)
     if match:
         code = match.group(1).strip()
-        # Capture stdout in a string buffer
-        f = io.StringIO()
-        with redirect_stdout(f):
+        
+        allowed_functions = ['get_temperature', 'get_soil_moisture', 'toggle_grow_lamp', 'water_plant']
+        is_safe = False
+        
+        for func in allowed_functions:
+            if code.startswith(func):
+                is_safe = True
+                break
+        
+        if is_safe:
             result = eval(code)
-        output = f.getvalue()
-        r = result if output == '' else output
+        else: 
+            print("Code does not match predetermined functions.")\
+            return None
+            
+        r = result
         return f'```tool_output\n{r}\n```'''
     return None
 
     
 def get_temperature() -> float:
+  print("Getting temperature 🌡️")
   simulated_temp = random.randrange(5, 30, 1)
   return  simulated_temp
 
 def get_soil_moisture() -> float:
+  print("Getting soil moisture 💦")
   simulated_moisture = random.randrange(0, 100, 1)
   return  simulated_moisture
 
 #actually maybe i should return success or failure codes here
 def toggle_grow_lamp(state: bool) -> str:
     print("Sending Lamp Toggle")
-    if state == true:
+    if state == True:
+        print("Turning Lamp On 🌕")
         mqtt_client.publish("commands/relay1", "on")
     else:
+        print("Turning Lamp Off 🌑")
         mqtt_client.publish("commands/relay1", "off")
 
     return "DONE"
 
 def water_plant(duration: float) -> str:
-    print("Sending Water Pump Command")
+    print(f"Watering plant for {duration} seconds 🌧️")
     mqtt_client.publish("commands/relay2", duration)
     return "DONE"
 
@@ -141,17 +158,25 @@ while True:
     #Telling Gemma to check the Plant
     response = chat.send_message(instruction_prompt_with_function_calling.format(user_message="Time to check on the plant"))
     print(f"{bcolors.OKBLUE}{response.text}{bcolors.RESET}")
-    time.sleep(60) 
+    print("------------------------------------------------------")
     #Extract tool and run command
     call_response = extract_tool_call(response.text)
-    print("Running")
     print(call_response)
-    time.sleep(60) 
+    print("------------------------------------------------------")
+    time.sleep(time_between_actions) 
+
     #Give Gemma the FeedbacK
     response = chat.send_message(call_response)
     print(f"{bcolors.OKBLUE}{response.text}{bcolors.RESET}")
-    time.sleep(60)
+    print("------------------------------------------------------")
     #Extract tool and run command
     call_response = extract_tool_call(response.text)
-    time.sleep(5)
+    time.sleep(time_between_actions) 
+
+    #Give Gemma the FeedbacK
+    response = chat.send_message(call_response)
+    print(f"{bcolors.OKBLUE}{response.text}{bcolors.RESET}")
+    print("------------------------------------------------------")
     #-> Then start the loop again
+    time.sleep(time_between_loop) 
+    print("------------------------------------------------------")
