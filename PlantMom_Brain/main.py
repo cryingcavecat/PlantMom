@@ -4,16 +4,58 @@ import re
 from dotenv import load_dotenv
 import random
 import time
+import paho.mqtt.client as mqtt
+
+
+#Some escaape char for colours
+class bcolors:
+    HEADER = '\033[95m'
+    OKBLUE = '\033[94m'
+    OKCYAN = '\033[96m'
+    OKGREEN = '\033[92m'
+    WARNING = '\033[93m'
+    FAIL = '\033[91m'
+    ENDC = '\033[0m'
+    BOLD = '\033[1m'
+    UNDERLINE = '\033[4m'
+    RESET = '\033[0m'
+
 
 load_dotenv()
 
-key_name = 'GEMINI_API_KEY'
-api_key = os.getenv(key_name,"Couldn't find API Key")
+# MQTT stuff
+mqtt_user = os.getenv('MQTT_USER',"Couldn't find MQTT username")
+mqtt_pass =  os.getenv('MQTT_PASS',"Couldn't find MQTT password")
+mqtt_broker = "192.168.0.199" #"localhost" 
+mqtt_port = 1883
+
+# GenAI stuff 
+api_key = os.getenv('GEMINI_API_KEY',"Couldn't find API Key")
 client = genai.Client(api_key=api_key)
- 
 # speicfy the model id
 model_id = "gemma-3-27b-it"
+
+def on_connect(client, userdata, flags, rc):
+    print("Connected with result code " + str(rc))
+
+    # Subscribe to sensor topics
+    mqtt_client.subscribe("sensors/light")
+    mqtt_client.subscribe("sensors/moisture")
+
+def on_message(client, userdata, msg):
+    print(f"[{msg.topic}] {msg.payload.decode()}")
+
  
+
+mqtt_client = mqtt.Client()
+mqtt_client.username_pw_set(mqtt_user, mqtt_pass)
+
+mqtt_client.on_connect = on_connect
+mqtt_client.on_message = on_message
+
+mqtt_client.connect(mqtt_broker, mqtt_port, 60)
+
+
 # extract the tool call from the response
 def extract_tool_call(text):
     import io
@@ -43,12 +85,17 @@ def get_soil_moisture() -> float:
 
 #actually maybe i should return success or failure codes here
 def toggle_grow_lamp(state: bool) -> str:
+    print("Sending Lamp Toggle")
     if state == true:
-        return "ON"
+        mqtt_client.publish("commands/relay1", "on")
     else:
-        return "OFF"
+        mqtt_client.publish("commands/relay1", "off")
+
+    return "DONE"
 
 def water_plant(duration: float) -> str:
+    print("Sending Water Pump Command")
+    mqtt_client.publish("commands/relay2", duration)
     return "DONE"
 
 ####To do 
@@ -93,14 +140,18 @@ chat = client.chats.create(model=model_id)
 while True:
     #Telling Gemma to check the Plant
     response = chat.send_message(instruction_prompt_with_function_calling.format(user_message="Time to check on the plant"))
-    print(response.text)
+    print(f"{bcolors.OKBLUE}{response.text}{bcolors.RESET}")
     time.sleep(60) 
     #Extract tool and run command
     call_response = extract_tool_call(response.text)
+    print("Running")
     print(call_response)
     time.sleep(60) 
     #Give Gemma the FeedbacK
     response = chat.send_message(call_response)
-    print(response.text)
+    print(f"{bcolors.OKBLUE}{response.text}{bcolors.RESET}")
     time.sleep(60)
+    #Extract tool and run command
+    call_response = extract_tool_call(response.text)
+    time.sleep(5)
     #-> Then start the loop again
