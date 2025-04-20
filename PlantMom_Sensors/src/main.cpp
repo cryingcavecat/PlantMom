@@ -1,4 +1,10 @@
 #include <Arduino.h>
+#include <secrets.h>
+
+const char* ssid = WIFI_SSID;
+const char* password = WIFI_PASS;
+const char* mqtt_user = MQTT_USER;
+const char* mqtt_pass = MQTT_PASS;
 
 // put function declarations here:
 int myFunction(int, int);
