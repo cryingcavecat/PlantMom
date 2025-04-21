@@ -2,6 +2,13 @@
 #include <secrets.h>
 #include <WiFi.h>
 #include <PubSubClient.h>
+#include <Adafruit_Sensor.h>
+#include <Adafruit_BMP280.h>
+
+
+#define SEALEVELPRESSURE_HPA (1021) //Joburg Sea Pressure
+ 
+Adafruit_BMP280 bme;
 
 WiFiClient wifNetwork;
 PubSubClient client(wifNetwork);
@@ -39,10 +46,13 @@ void reconnect() {
 }
 
 void toggleLight(String state){
+  Serial.println("Toggle Light Command Received");
   if (state == "on"){
     digitalWrite(lightRelayPin,HIGH);
+    client.publish("sensors/feedback", "LIGHT STATE: ON", true);
   } else if (state == "off"){
      digitalWrite(lightRelayPin,LOW);
+     client.publish("sensors/feedback", "LIGHT STATE: OFF", true);
   }
 }
 
@@ -55,6 +65,7 @@ void pumpWater(float time){
     delay(time);
     digitalWrite(lightRelayPin,LOW);
     Serial.println("Done Pumping");
+    client.publish("sensors/feedback", "DONE PUMPING WATER", true);
   }else{
     Serial.println("Water pumping time error");
   }
@@ -90,6 +101,11 @@ void setup() {
   Serial.begin(115200);
   pinMode(lightRelayPin, OUTPUT);
 
+  if (!bme.begin(0x76)) {
+    Serial.println("Could not find a valid BME280 sensor, check wiring!");
+    delay(500);
+  }
+
   WiFi.begin(ssid, password);
   while (WiFi.status() != WL_CONNECTED){
       Serial.println("Attempting WiFi Connection ...");
@@ -109,8 +125,11 @@ void setup() {
 void loop() {
   if (!client.connected()) reconnect();
  
+  Serial.print("Temperature = ");
+  Serial.print(bme.readTemperature());
+  Serial.println(" *C");
   Serial.println();
-  toggleLight("on");
+  // toggleLight("on");
    //reading light values
   lightVal = analogRead(lightPin);
   Serial.print("Light Value = ");
