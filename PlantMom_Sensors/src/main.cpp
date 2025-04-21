@@ -31,6 +31,9 @@ int moistureVal = 0;
 int lightRelayPin = 25;
 int pumpRelayPin = 26;
 
+float temperature = 0;
+
+bool printDebugOutput = false;
 
 void reconnect() {
   while (!client.connected()) {
@@ -60,10 +63,11 @@ void pumpWater(float time){
   Serial.print("Pumping water for:");
   Serial.println(time);
   if (time > 0){
-    digitalWrite(lightRelayPin,HIGH);
+    digitalWrite(pumpRelayPin,HIGH);
     Serial.println("Starting Pumping");
-    delay(time);
-    digitalWrite(lightRelayPin,LOW);
+    //I need to adjust for ms
+    delay(time * 1000);
+    digitalWrite(pumpRelayPin,LOW);
     Serial.println("Done Pumping");
     client.publish("sensors/feedback", "DONE PUMPING WATER", true);
   }else{
@@ -100,6 +104,7 @@ void callback(char* topic, byte* message, unsigned int length) {
 void setup() {
   Serial.begin(115200);
   pinMode(lightRelayPin, OUTPUT);
+  pinMode(pumpRelayPin, OUTPUT);
 
   if (!bme.begin(0x76)) {
     Serial.println("Could not find a valid BME280 sensor, check wiring!");
@@ -124,27 +129,41 @@ void setup() {
 
 void loop() {
   if (!client.connected()) reconnect();
- 
-  Serial.print("Temperature = ");
-  Serial.print(bme.readTemperature());
-  Serial.println(" *C");
-  Serial.println();
-  // toggleLight("on");
+  client.loop();
+
+  
+  
+  temperature = bme.readTemperature();
+
+  client.publish("sensors/temp", String(temperature).c_str(), true);
+
    //reading light values
   lightVal = analogRead(lightPin);
-  Serial.print("Light Value = ");
-  Serial.println(lightVal);
+
   lightAdjVolt = lightVal * (3.3/1024);
-  Serial.print("lightAdjVolt = ");
-  Serial.println(lightAdjVolt);
+
   client.publish("sensors/light", String(lightAdjVolt).c_str(), true);
 
 
   //reading moisture values
   moistureVal = analogRead(moisturePin);
-  Serial.print("Moisture Value = ");
-  Serial.println(moistureVal);
+
   client.publish("sensors/moisture", String(moistureVal).c_str(), true);
+
+  if (printDebugOutput){
+    Serial.print("Moisture Value = ");
+    Serial.println(moistureVal);
+
+    Serial.print("lightAdjVolt = ");
+    Serial.println(lightAdjVolt);
+
+    Serial.print("Light Value = ");
+    Serial.println(lightVal);
+
+    Serial.print("Temperature = ");
+    Serial.print(temperature);
+    Serial.println(" C");
+  }
   delay(5000);
 }
 
