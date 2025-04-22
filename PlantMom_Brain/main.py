@@ -6,11 +6,12 @@ import random
 import time
 import paho.mqtt.client as mqtt
 from print_color import print
+from datetime import datetime
 
 load_dotenv()
 
-time_between_actions = 20
-time_between_loop = 20
+time_between_actions = 60
+time_between_loop = 1800
 
 stored_readings = {}
 received_first_readings = False
@@ -67,7 +68,7 @@ def extract_tool_call(text):
     if match:
         code = match.group(1).strip()
         
-        allowed_functions = ['get_temperature', 'get_soil_moisture', 'toggle_grow_lamp', 'water_plant', 'get_light_reading']
+        allowed_functions = ['get_temperature', 'get_time', 'get_soil_moisture', 'toggle_grow_lamp', 'water_plant', 'get_light_reading']
         is_safe = False
         
         for func in allowed_functions:
@@ -87,9 +88,6 @@ def extract_tool_call(text):
     else:
         return None
 
-## TODO:
-## Get time
-##Get lamp status
     
 def get_temperature() -> float:
   print("Getting temperature 🌡️")
@@ -103,6 +101,13 @@ def get_soil_moisture() -> float:
   curr_moisture = float(stored_readings.get("sensors/moisture"))
   mqtt_client.publish("overview/status", "Getting soil moisture 💦")
   return  curr_moisture
+
+def get_time() -> str:
+  print("Getting Time ⏰")
+  mqtt_client.publish("overview/status", "Getting Time ⏰")
+  current_time = datetime.now()
+  date_str = current_time.strftime("%H:%M:%S")
+  return date_str
 
 def get_light_reading() -> float:
   print("Getting light reading 🔦")
@@ -135,21 +140,27 @@ def water_plant(duration: float) -> str:
 #- add Time - we also want to simulate natural rythym of light
 # add checking light level with photodiode
 
-instruction_prompt_with_function_calling = '''You are in charge of taking care of a plant (African bird's eye chili). Water first. At each turn, if you decide to invoke any of the function(s), it should be wrapped with ```tool_code```. The python methods described below are imported and available, you can only use defined methods. The generated code should be readable and efficient. The response to a method will be wrapped in ```tool_output``` use it to call more tools or generate a helpful, friendly response. When using a ```tool_call``` think step by step why and how it should be used. You may only choose one function per turn.
+instruction_prompt_with_function_calling = '''You are in charge of taking care of a plant (African bird's eye chili). At each turn, if you decide to invoke any of the function(s), it should be wrapped with ```tool_code```. The python methods described below are imported and available, you can only use defined methods. The generated code should be readable and efficient. The response to a method will be wrapped in ```tool_output``` use it to call more tools or generate a helpful, friendly response. Include ASCII art or emojis when you're thinking to seem more human. When using a ```tool_call``` think step by step why and how it should be used. You may only choose one function per turn.
 
 The following Python methods are available:
 
 ```python
+
+def get_time() -> str:
+    """Gets the current time.
+    """
+
 def get_temperature() -> float:
     """Get the latest measured temperature in °C
     """
 
 def get_soil_moisture() -> float:
-    """Get the moisture level of the plant's soil ranging from 4095 (dry or malfunctioning) to 1800 (soaking)
+    """Get the moisture level of the plant's soil ranging from 1200 (soaking) to 4095 (bone dry or not working)
+       Values below 800 should be considered as the sensor off.
     """    
 
 def get_light_reading() -> float:
-    """Get the light level in the room - 0 (Extremely bright) to 10 (very dark)
+    """Get the light level in the room - 0 (Extremely bright) to 9 (very dark)
     """    
 
 def toggle_grow_lamp(state: bool) -> string:

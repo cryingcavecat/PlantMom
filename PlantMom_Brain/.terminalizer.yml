@@ -1,0 +1,48 @@
+version: 2
+
+# Output settings
+command: ""
+cwd: ""
+env: {}
+cols: 100
+rows: 30
+timeout: 10
+frameDelay: 50 # Typing speed (ms)
+repeat: 0
+cursorStyle: block
+cursorBlink: true
+
+# Rendering
+theme:
+  background: "#101610"       # deep earthy green
+  foreground: "#d4eadf"       # soft plant leaf
+  cursor: "#8bcf88"           # vibrant minty green
+  palette:
+    black: "#1c1c1c"
+    red: "#e57373"
+    green: "#81c784"
+    yellow: "#fff176"
+    blue: "#64b5f6"
+    magenta: "#ba68c8"
+    cyan: "#4dd0e1"
+    white: "#eeeeee"
+    brightBlack: "#757575"
+    brightRed: "#ef9a9a"
+    brightGreen: "#a5d6a7"
+    brightYellow: "#fff59d"
+    brightBlue: "#90caf9"
+    brightMagenta: "#ce93d8"
+    brightCyan: "#80deea"
+    brightWhite: "#ffffff"
+
+# Font & visuals
+fontFamily: "Fira Code, Consolas, monospace"
+fontSize: 16
+lineHeight: 1.2
+letterSpacing: 1
+window:
+  width: 1000
+  height: 600
+  padding: 20
+  margin: 40
+  frame: none

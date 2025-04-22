@@ -1,0 +1,406 @@
+# The configurations that used for the recording, feel free to edit them
+config:
+
+  # Specify a command to be executed
+  # like `/bin/bash -l`, `ls`, or any other commands
+  # the default is bash for Linux
+  # or powershell.exe for Windows
+  command: powershell.exe
+  
+  # Specify the current working directory path
+  # the default is the current working directory path
+  cwd: C:\Users\liamk\OneDrive\Documents\Personal Code\PlantMom\PlantMom_Brain
+  
+  # Export additional ENV variables
+  env:
+    recording: true
+  
+  # Explicitly set the number of columns
+  # or use `auto` to take the current
+  # number of columns of your shell
+  cols: 181
+  
+  # Explicitly set the number of rows
+  # or use `auto` to take the current
+  # number of rows of your shell
+  rows: 21
+  
+  # Amount of times to repeat GIF
+  # If value is -1, play once
+  # If value is 0, loop indefinitely
+  # If value is a positive number, loop n times
+  repeat: 0
+  
+  # Quality
+  # 1 - 100
+  quality: 100
+  
+  # Delay between frames in ms
+  # If the value is `auto` use the actual recording delays
+  frameDelay: auto
+  
+  # Maximum delay between frames in ms
+  # Ignored if the `frameDelay` isn't set to `auto`
+  # Set to `auto` to prevent limiting the max idle time
+  maxIdleTime: 2000
+  
+  # The surrounding frame box
+  # The `type` can be null, window, floating, or solid`
+  # To hide the title use the value null
+  # Don't forget to add a backgroundColor style with a null as type
+  frameBox:
+    type: floating
+    title: Terminalizer
+    style:
+      border: 0px black solid
+      # boxShadow: none
+      # margin: 0px
+  
+  # Add a watermark image to the rendered gif
+  # You need to specify an absolute path for
+  # the image on your machine or a URL, and you can also
+  # add your own CSS styles
+  watermark:
+    imagePath: null
+    style:
+      position: absolute
+      right: 15px
+      bottom: 15px
+      width: 100px
+      opacity: 0.9
+  
+  # Cursor style can be one of
+  # `block`, `underline`, or `bar`
+  cursorStyle: block
+  
+  # Font family
+  # You can use any font that is installed on your machine
+  # in CSS-like syntax
+  fontFamily: "Monaco, Lucida Console, Ubuntu Mono, Monospace"
+  
+  # The size of the font
+  fontSize: 12
+  
+  # The height of lines
+  lineHeight: 1
+  
+  # The spacing between letters
+  letterSpacing: 0
+  
+  # Theme
+  theme:
+    background: "transparent"
+    foreground: "#afafaf"
+    cursor: "#c7c7c7"
+    black: "#232628"
+    red: "#fc4384"
+    green: "#b3e33b"
+    yellow: "#ffa727"
+    blue: "#75dff2"
+    magenta: "#ae89fe"
+    cyan: "#708387"
+    white: "#d5d5d0"
+    brightBlack: "#626566"
+    brightRed: "#ff7fac"
+    brightGreen: "#c8ed71"
+    brightYellow: "#ebdf86"
+    brightBlue: "#75dff2"
+    brightMagenta: "#ae89fe"
+    brightCyan: "#b1c6ca"
+    brightWhite: "#f9f9f4"
+  
+# Records, feel free to edit them
+records:
+  - delay: 496
+    content: "\e[?9001h\e[?1004h"
+  - delay: 71
+    content: "\e[?25l\e[2J\e[m\e[HWindows PowerShell\r\nCopyright (C) Microsoft Corporation. All rights reserved.\e[4;1HInstall the latest PowerShell for new features and improvements! https://aka.ms/PSWindows\e]0;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\a\e[?25h"
+  - delay: 19
+    content: "\e[?25l\e[6;1H\e[?25h"
+  - delay: 112
+    content: "Cannot load PSReadline module.  Console is running without PSReadline.\r\n"
+  - delay: 20
+    content: >-
+      PS C:\Users\liamk\OneDrive\Documents\Personal
+      Code\PlantMom\PlantMom_Brain> 
+  - delay: 4596
+    content: .\Scripts\Activate.ps1python main.py
+  - delay: 1580
+    content: "\e[?25l\e[7;106H       \e[7;106H\e[?25h"
+  - delay: 497
+    content: "\e[?25l\e[7;77H\e[29X\e[?25h"
+  - delay: 4497
+    content: .\Scripts\Activate.ps1
+  - delay: 1024
+    content: "\r\n"
+  - delay: 76
+    content: "\e[38;5;9m.\\Scripts\\Activate.ps1 : File C:\\Users\\liamk\\OneDrive\\Documents\\Personal Code\\PlantMom\\PlantMom_Brain\\Scripts\\Activate.ps1 cannot be loaded because running scripts is disabled on "
+  - delay: 12
+    content: "\e[m\e[38;5;9m\r\nthis system. For more information, see about_Execution_Policies at https:/go.microsoft.com/fwlink/?LinkID=135170.\r\nAt line:1 char:1\r\n+ .\\Scripts\\Activate.ps1\r\n+ ~~~~~~~~~~~~~~~~~~~~~~\r\n    + CategoryInfo          : SecurityError: (:) [], PSSecurityException\r\n    + FullyQualifiedErrorId : UnauthorizedAccess\e[m\r\nPS C:\\Users\\liamk\\OneDrive\\Documents\\Personal Code\\PlantMom\\PlantMom_Brain> "
+  - delay: 20378
+    content: Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope
+  - delay: 18
+    content: " Process\r\n"
+  - delay: 453
+    content: "\e[38;5;9mSet-ExecutionPolicy : The 'Set-ExecutionPolicy' command was found in the module 'Microsoft.PowerShell.Security', but the module could not be loaded. For more information, run \e[m\e[38;5;9m\r\n'Import-Module Microsoft.PowerShell.Security'.\r\nAt line:1 char:1\r\n+ Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process\r\n+ ~~~~~~~~~~~~~~~~~~~\r\n    + CategoryInfo          : ObjectNotFound: (Set-ExecutionPolicy:String) [], CommandNotFoundException\e[m\r\n\e[38;5;9m    + FullyQualifiedErrorId : CouldNotAutoloadMatchingModule\e[m\r\n\e[38;5;9m\e[1C"
+  - delay: 10
+    content: "\e[m\r\n"
+  - delay: 16
+    content: >-
+      PS C:\Users\liamk\OneDrive\Documents\Personal
+      Code\PlantMom\PlantMom_Brain> 
+  - delay: 9850
+    content: "Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process\r"
+  - delay: 10
+    content: |+
+
+  - delay: 32
+    content: "\e[38;5;9mSet-ExecutionPolicy : The 'Set-ExecutionPolicy' command was found in the module 'Microsoft.PowerShell.Security', but the module could not be loaded. For more information, run \e[m\r\n\e[38;5;9m'Import-Module Microsoft.PowerShell.Security'.\e[m\r\n\e[38;5;9mAt line:1 char:1\e[m\r\n\e[38;5;9m+ Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process\e[m\r\n\e[38;5;9m+ ~~~~~~~~~~~~~~~~~~~\e[m\r\n\e[38;5;9m    + CategoryInfo          : ObjectNotFound: (Set-ExecutionPolicy:String) [], CommandNotFoundException\e[m\r\n\e[38;5;9m    + FullyQualifiedErrorId : CouldNotAutoloadMatchingModule\e[m\r\n\e[38;5;9m\e[1C"
+  - delay: 10
+    content: "\e[m\r\nPS C:\\Users\\liamk\\OneDrive\\Documents\\Personal Code\\PlantMom\\PlantMom_Brain>\e[1C"
+  - delay: 15939
+    content: "Import-Module Microsoft.PowerShell.Security\r\n"
+  - delay: 70
+    content: "\e[38;5;9mImport-Module : The following error occurred while loading the extended type data file: Error in TypeData \"System.Security.AccessControl.ObjectSecurity\": The member AuditToString \e[m\r\n\e[38;5;9mis already present.\e[m\r\n\e[38;5;9mError in TypeData \"System.Security.AccessControl.ObjectSecurity\": The member AccessToString is already present.\e[m\r\n\e[38;5;9mError in TypeData \"System.Security.AccessControl.ObjectSecurity\": The member Sddl is already present.\e[m\r\n\e[38;5;9mError in TypeData \"System.Security.AccessControl.ObjectSecurity\": The member Access is already present.\e[m\r\n\e[38;5;9mError in TypeData \"System.Security.AccessControl.ObjectSecurity\": The member Group is already present.\e[m\r\n\e[38;5;9mError in TypeData \"System.Security.AccessControl.ObjectSecurity\": The member Owner is already present.\e[m\r\n\e[38;5;9mError in TypeData \"System.Security.AccessControl.ObjectSecurity\": The member Path is already present.\e[m\r\n\e[38;5;9mAt line:1 char:1\e[m\r\n\e[38;5;9m+ Import-Module Microsoft.PowerShell.Security\e[m\r\n\e[38;5;9m+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\e[m\r\n\e[38;5;9m    + CategoryInfo          : InvalidOperation: (:) [Import-Module], RuntimeException\e[m\r\n\e[38;5;9m    + FullyQualifiedErrorId : FormatXmlUpdateException,Microsoft.PowerShell.Commands.ImportModuleCommand\e[m\r\n\e[38;5;9m\e[1C"
+  - delay: 10
+    content: "\e[m\r\nPS C:\\Users\\liamk\\OneDrive\\Documents\\Personal Code\\PlantMom\\PlantMom_Brain>\e[1C"
+  - delay: 4761
+    content: Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope
+  - delay: 6
+    content: " Process\r"
+  - delay: 14
+    content: |+
+
+  - delay: 29
+    content: "\e[38;5;9mSet-ExecutionPolicy : The 'Set-ExecutionPolicy' command was found in the module 'Microsoft.PowerShell.Security', but the module could not be loaded. For more information, run \e[m\r\n\e[38;5;9m'Import-Module Microsoft.PowerShell.Security'.\e[m\r\n\e[38;5;9mAt line:1 char:1\e[m\r\n\e[38;5;9m+ Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process\e[m\r\n\e[38;5;9m+ ~~~~~~~~~~~~~~~~~~~\e[m\r\n\e[38;5;9m    + CategoryInfo          : ObjectNotFound: (Set-ExecutionPolicy:String) [], CommandNotFoundException\e[m\r\n\e[38;5;9m    + FullyQualifiedErrorId : CouldNotAutoloadMatchingModule\e[m\r\n\e[38;5;9m\e[1C"
+  - delay: 15
+    content: "\e[m\r\nPS C:\\Users\\liamk\\OneDrive\\Documents\\Personal Code\\PlantMom\\PlantMom_Brain>\e[1C"
+  - delay: 6264
+    content: >-
+      cd "C:\Users\liamk\OneDrive\Documents\Personal
+      Code\PlantMom\PlantMom_Brain"call Scripts\activate.ba
+  - delay: 10
+    content: t
+  - delay: 2293
+    content: "\r\n"
+  - delay: 51
+    content: "\e[38;5;9mSet-Location : A positional parameter cannot be found that accepts argument 'call'.\e[m\r\n\e[38;5;9mAt line:1 char:1\e[m\r\n\e[38;5;9m+ cd \"C:\\Users\\liamk\\OneDrive\\Documents\\Personal Code\\PlantMom\\PlantMom ...\e[m\r\n\e[38;5;9m+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\e[m\r\n\e[38;5;9m    + CategoryInfo          : InvalidArgument: (:) [Set-Location], ParameterBindingException\e[m\r\n\e[38;5;9m    + FullyQualifiedErrorId : PositionalParameterNotFound,Microsoft.PowerShell.Commands.SetLocationCommand\e[m\r\n\e[38;5;9m\e[1C"
+  - delay: 19
+    content: "\e[m\r\nPS C:\\Users\\liamk\\OneDrive\\Documents\\Personal Code\\PlantMom\\PlantMom_Brain>\e[1C"
+  - delay: 5168
+    content: "powershell -ExecutionPolicy Bypass\r\n"
+  - delay: 109
+    content: "Windows PowerShell\r\nCopyright (C) Microsoft Corporation. All rights reserved.\r\n\nInstall the latest PowerShell for new features and improvements! https://aka.ms/PSWindows\r\n"
+  - delay: 11
+    content: |+
+
+  - delay: 145
+    content: >-
+      PS C:\Users\liamk\OneDrive\Documents\Personal
+      Code\PlantMom\PlantMom_Brain> 
+  - delay: 7517
+    content: "\e[?25l"
+  - delay: 12
+    content: "\e[93mc\e[97m\e[2m\e[3mlear\e[21;78H\e[?25h"
+  - delay: 18
+    content: "\e[m\e[?25l\e[93m\bcd \e[36m\"C:\\Users\\liamk\\OneDrive\\Documents\\Personal Code\\PlantMom\\PlantMom_Brain\"\e[?25h"
+  - delay: 11
+    content: "\e[m\r\n"
+  - delay: 49
+    content: >-
+      PS C:\Users\liamk\OneDrive\Documents\Personal
+      Code\PlantMom\PlantMom_Brain> 
+  - delay: 11
+    content: "\e[93m.\\Scripts\\Activate.ps1\e[m\r\n"
+  - delay: 323
+    content: "\e[38;5;10m(PlantMom_Brain) "
+  - delay: 20
+    content: "\e[mPS C:\\Users\\liamk\\OneDrive\\Documents\\Personal Code\\PlantMom\\PlantMom_Brain> "
+  - delay: 4804
+    content: "\e[?25l"
+  - delay: 14
+    content: "\e[93m.\\Scripts\\Activate.ps1\e[?25h"
+  - delay: 177
+    content: "\e[m\e[?25l"
+  - delay: 9
+    content: "\e[93m\e[21;94Hcd \e[36m\"C:\\Users\\liamk\\OneDrive\\Documents\\Personal Code\\PlantMom\\PlantMom_Brain\"\e[?25h"
+  - delay: 433
+    content: "\e[m\e[?25l"
+  - delay: 14
+    content: "\e[93m\e[21;94Hterminalizer \e[37mrecord demo\e[52X\e[?25h"
+  - delay: 166
+    content: "\e[m\e[?25l"
+  - delay: 19
+    content: "\e[93m\e[21;94Hls\e[22X\e[?25h"
+  - delay: 125
+    content: "\e[m\e[?25l"
+  - delay: 15
+    content: "\e[93m\e[21;94Hclear\e[?25h"
+  - delay: 718
+    content: "\e[m\e[?25l"
+  - delay: 9
+    content: "\e[93m\e[21;94Hnpm \e[37minstall \e[90m-g \e[37mterminalizer\e[?25h"
+  - delay: 288
+    content: "\e[m\e[?25l"
+  - delay: 22
+    content: "\e[93m\e[21;94Hclear\e[22X\e[?25h"
+  - delay: 150
+    content: "\e[m\e[?25l"
+  - delay: 18
+    content: "\e[93m\e[21;94Hls   \e[21;96H\e[?25h"
+  - delay: 129
+    content: "\e[m\e[?25l"
+  - delay: 12
+    content: "\e[93m\e[21;94Hterminalizer \e[37mrecord demo\e[?25h"
+  - delay: 1701
+    content: "\e[m\e[?25l"
+  - delay: 10
+    content: "\e[93m\e[21;94Hls\e[22X\e[?25h"
+  - delay: 174
+    content: "\e[m\e[?25l"
+  - delay: 12
+    content: "\e[93m\e[21;94Hclear\e[?25h"
+  - delay: 164
+    content: "\e[m\e[?25l"
+  - delay: 22
+    content: "\e[93m\e[21;94Hnpm \e[37minstall \e[90m-g \e[37mterminalizer\e[?25h"
+  - delay: 200
+    content: "\e[m\e[?25l"
+  - delay: 15
+    content: "\e[93m\e[21;94Hpip \e[37muninstall asciinema    \e[21;117H\e[?25h"
+  - delay: 329
+    content: "\e[m\e[?25l"
+  - delay: 12
+    content: "\e[93m\e[21;94Hpip \e[37minstall asciinema  \e[21;115H\e[?25h"
+  - delay: 157
+    content: "\e[m\e[?25l"
+  - delay: 13
+    content: "\e[93m\e[21;94Hpipx \e[37minstall asciinema\e[?25h"
+  - delay: 156
+    content: "\e[m\e[?25l"
+  - delay: 12
+    content: "\e[93m\e[21;94Hasciinema \e[37mrec demo.cast\e[?25h"
+  - delay: 126
+    content: "\e[m\e[?25l"
+  - delay: 12
+    content: "\e[93m\e[21;94H.\\vhs.exe \e[37m.\\demo.tape  \e[21;115H\e[?25h"
+  - delay: 149
+    content: "\e[m\e[?25l"
+  - delay: 21
+    content: "\e[93m\e[21;94Hffmpeg\e[15X\e[?25h"
+  - delay: 142
+    content: "\e[m\e[?25l"
+  - delay: 12
+    content: "\e[93m\e[21;94Hvhs \e[37m.\\demo.tape\e[?25h"
+  - delay: 149
+    content: "\e[m\e[?25l"
+  - delay: 20
+    content: "\e[93m\e[21;94Httytd\e[10X\e[?25h"
+  - delay: 147
+    content: "\e[m\e[?25l"
+  - delay: 9
+    content: "\e[93m\e[21;94HECHO \e[37mhell\e[?25h"
+  - delay: 191
+    content: "\e[m\e[?25l"
+  - delay: 9
+    content: "\e[93m\e[21;94Hwinget \e[37minstall tsl0922.ttyd\e[?25h"
+  - delay: 180
+    content: "\e[m\e[?25l"
+  - delay: 21
+    content: "\e[93m\e[21;94Hvhs \e[37mnew demo.tape\e[10X\e[?25h"
+  - delay: 177
+    content: "\e[m\e[?25l"
+  - delay: 23
+    content: "\e[93m\e[21;94Hgo \e[37minstall github.com/charmbracelet/vhs@latest\e[?25h"
+  - delay: 335
+    content: "\e[m\e[?25l"
+  - delay: 21
+    content: "\e[93m\e[21;94Hscoop \e[37minstall vhs\e[29X\e[?25h"
+  - delay: 159
+    content: "\e[m\e[?25l"
+  - delay: 10
+    content: "\e[93m\e[21;94Hpython \e[37m.\\main.py \b\e[?25h"
+  - delay: 342
+    content: "\e[m\e[?25l"
+  - delay: 16
+    content: "\e[93m\e[21;94Hgit \e[37mpush        \e[21;102H\e[?25h"
+  - delay: 334
+    content: "\e[m\e[?25l"
+  - delay: 21
+    content: "\e[93m\e[21;94Hpython \e[37m.\\main.py\e[?25h"
+  - delay: 280
+    content: "\e[m\r\n"
+  - delay: 779
+    content: "\e[92m[System] \e[37mStarting MQTT Connection\r\e[m\nC:\\Users\\liamk\\OneDrive\\Documents\\Personal Code\\PlantMom\\PlantMom_Brain\\main.py:51: DeprecationWarning: Callback API version 1 is deprecated, update to latest version\r\n  mqtt_client = mqtt.Client(mqtt.CallbackAPIVersion.VERSION1)\r"
+  - delay: 8
+    content: |+
+
+  - delay: 18
+    content: "\e[31m[System Init] \e[37mWaiting for first values\r\e[m\nConnected to broker with result code 0\r"
+  - delay: 12
+    content: |+
+
+  - delay: 7937
+    content: "\e[94m[Gemma] \e[37mOkay, let's check on the African bird's eye chili! \U0001F336️ First, I want to know how moist the soil is. That will help me decide if it needs water.\r\e[m\n\e[37m\e[m\n\e[37m```tool_code\r\e[m\n\e[37mget_soil_moisture()\r\e[m\n\e[37m```\e[m\r\n------------------------------------------------------\r\nGetting soil moisture \U0001F4A6\r\n\e[92m[Result] \e[37m```tool_output\e[K\r\e[m\n\e[37m1744.0\r\e[m\n\e[37m```\r\e[m\n------------------------------------------------------\r"
+  - delay: 17
+    content: |+
+
+  - delay: 18182
+    content: "\e[94m[Gemma] \e[37mHmm, the soil moisture is 1744.0. That's pretty good – not too dry, not too wet! \U0001F44D It seems like the plant doesn't need watering *right now*.\r\e[m\n\e[37m\e[m\n\e[37mNext, I'd like to check the temperature to make sure it's within a comfortable range for a chili plant.\r\e[m\n\e[37m\e[m\n\e[37m```tool_code\r\e[m\n\e[37mget_temperature()\r\e[m\n\e[37m```\e[m\r\n------------------------------------------------------\r\nGetting temperature \U0001F321️\r"
+  - delay: 18
+    content: |+
+
+  - delay: 18625
+    content: "\e[94m[Gemma] \e[37mOh dear! The temperature reading is `nan` (Not a Number). \U0001F631 That means the temperature sensor isn't working correctly. I can't rely on that information.\r\e[m\n\e[37m\e[m\n\e[37mSince I can't get a temperature reading, and the soil moisture is good, I'll check the light level. African bird's eye chilis like bright light!\r\e[m\n\e[37m\e[m\n\e[37m```tool_code\r\e[m\n\e[37mget_light_reading()\r\e[m\n\e[37m```\e[m\r\n------------------------------------------------------\r\nGetting light reading \U0001F526\r"
+  - delay: 14
+    content: |+
+
+  - delay: 18088
+    content: "\e[94m[Gemma] \e[37mOkay, the light reading is 7.6. That's a bit on the darker side. \U0001F4A1 African bird's eye chilis prefer bright light, so I should turn on the grow lamp to give it a boost!\r\e[m\n\e[37m\e[m\n\e[37m```tool_code\r\e[m\n\e[37mtoggle_grow_lamp(state=True)\r\e[m\n\e[37m```\e[m\r\n------------------------------------------------------\r\nSending Lamp Toggle\r\nTurning Lamp On \U0001F315\r"
+  - delay: 15
+    content: |+
+
+  - delay: 22520
+    content: "\e[94m[Gemma] \e[37mExcellent! The grow lamp is now ON. ✨ Hopefully, that extra light will help my little chili plant thrive. I'll keep monitoring it regularly. \U0001F60A Is there anything else I sho\e[m\r\n\e[37m\e[20;181Hould do at this time?\r\e[m\n------------------------------------------------------\r"
+  - delay: 22
+    content: |+
+
+  - delay: 32406
+    content: "Traceback (most recent call last):\r\n  File \"C:\\Users\\liamk\\OneDrive\\Documents\\Personal Code\\PlantMom\\PlantMom_Brain\\main.py\", line 223, in <module>\r\n    time.sleep(time_between_loop)\r\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\r\nKeyboardInterrupt\r"
+  - delay: 15
+    content: |+
+
+  - delay: 77
+    content: "\e[38;5;10m(PlantMom_Brain) \e[mPS C:\\Users\\liamk\\OneDrive\\Documents\\Personal Code\\PlantMom\\PlantMom_Brain> "
+  - delay: 848
+    content: "\e[?25l"
+  - delay: 17
+    content: "\e[93me\e[97m\e[2m\e[3mCHO hell\e[21;95H\e[?25h"
+  - delay: 297
+    content: "\e[m\e[?25l"
+  - delay: 14
+    content: "\e[93m\bex\e[97m\e[2m\e[3mport CGO_ENABLED=1\e[21;96H\e[?25h"
+  - delay: 130
+    content: "\e[m\e[?25l"
+  - delay: 9
+    content: "\e[93m\e[21;94Hexi\e[97m\e[2m\e[3mt\e[m\e[16X\b\e[?25h"
+  - delay: 271
+    content: "\e[?25l"
+  - delay: 23
+    content: "\e[92m\e[21;94Hexit\e[?25h"
+  - delay: 222
+    content: "\e[m\r\n"
+  - delay: 40
+    content: >-
+      PS C:\Users\liamk\OneDrive\Documents\Personal
+      Code\PlantMom\PlantMom_Brain> 
+  - delay: 3635
+    content: e
+  - delay: 256
+    content: x
+  - delay: 168
+    content: i
+  - delay: 222
+    content: t
+  - delay: 242
+    content: "\r\n"
