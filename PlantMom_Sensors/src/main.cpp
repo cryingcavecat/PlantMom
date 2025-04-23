@@ -27,6 +27,7 @@ int moisturePin = 35;
 int lightVal = 0;
 float lightAdjVolt = 0;
 int moistureVal = 0;
+float moistureValAdj = 0;
 
 int lightRelayPin = 25;
 int pumpRelayPin = 26;
@@ -140,7 +141,7 @@ void loop() {
    //reading light values
   lightVal = analogRead(lightPin);
 
-  lightAdjVolt = lightVal * (3.3/1024);
+  lightAdjVolt = lightVal * (3.3/4095.0);
 
   client.publish("sensors/light", String(lightAdjVolt).c_str(), true);
 
@@ -148,11 +149,16 @@ void loop() {
   //reading moisture values
   moistureVal = analogRead(moisturePin);
 
-  client.publish("sensors/moisture", String(moistureVal).c_str(), true);
+  moistureValAdj = moistureVal * (3.3 / 4095.0); 
+
+  client.publish("sensors/moisture", String(moistureValAdj).c_str(), true);
 
   if (printDebugOutput){
     Serial.print("Moisture Value = ");
     Serial.println(moistureVal);
+
+    Serial.print("Moisture Value Adj = ");
+    Serial.println(moistureValAdj);
 
     Serial.print("lightAdjVolt = ");
     Serial.println(lightAdjVolt);
